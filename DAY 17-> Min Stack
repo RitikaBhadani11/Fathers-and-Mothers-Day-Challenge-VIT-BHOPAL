@@ -1,0 +1,54 @@
+import java.util.Stack;
+
+class MinStack {
+    private Stack<Long> st;
+    private long min;
+
+    public MinStack() {
+        st = new Stack<>();
+        min = Integer.MAX_VALUE;
+    }
+    
+    public void push(int val) {
+        if (st.isEmpty()) {
+            min = val;
+            st.push((long) val);
+        } else {
+            if (val < min) {
+                st.push(2L * val - min);  // Store modified value as long
+                min = val;
+            } else {
+                st.push((long) val);
+            }
+        }
+    }
+    
+    public void pop() {
+        if (st.isEmpty()) return;
+
+        if (st.peek() < min) {
+            min = 2 * min - st.pop();  // Restore previous min
+        } else {
+            st.pop();
+        }
+
+        // If stack is empty after pop, reset min
+        if (st.isEmpty()) {
+            min = Integer.MAX_VALUE;
+        }
+    }
+    
+    public int top() {
+        if (st.isEmpty()) return -1;
+        
+        if (st.peek() < min) {
+            return (int) min;  // Return actual min value
+        } else {
+            return st.peek().intValue();  // Convert long to int
+        }
+    }
+    
+    public int getMin() {
+        return st.isEmpty() ? -1 : (int) min;  // Handle empty stack case
+    }
+}
