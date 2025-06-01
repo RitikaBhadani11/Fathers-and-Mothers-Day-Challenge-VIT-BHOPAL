@@ -1,0 +1,46 @@
+//Diamter of Binary Tree
+class Solution {
+    int max=0;
+    int findHeight(TreeNode root){
+        if(root==null){
+            return 0;
+        }
+        int lh=findHeight(root.left);
+        int rh=findHeight(root.right);
+        return 1+Math.max(lh,rh);
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        int Lheight=findHeight(root.left);
+        int Rheight=findHeight(root.right);
+        int dia=Lheight+Rheight;
+        if(dia>max){
+            max=dia;
+        }
+        diameterOfBinaryTree(root.left);
+        diameterOfBinaryTree(root.right);
+        return max;
+        
+    }
+}
+//Find Duplicates
+class Solution {
+    public int findDuplicate(int[] nums) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+        for(int num:nums){
+            if(map.get(num)==2){
+                return num;
+            }
+            if(map.get(num)>2){
+                return num;
+            }
+        }
+        return -1;
+    }
+}
