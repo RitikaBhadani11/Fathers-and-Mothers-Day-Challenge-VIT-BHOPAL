@@ -1,0 +1,40 @@
+//sum of left leaves
+class Solution {
+    int sum = 0;
+
+    void solve(TreeNode root) {
+        if (root == null) return;
+
+        // Check if left child is a leaf
+        if (root.left != null && root.left.left == null && root.left.right == null) {
+            sum += root.left.val;
+        }
+
+        // Recurse both left and right children
+        solve(root.left);
+        solve(root.right);
+    }
+
+    public int sumOfLeftLeaves(TreeNode root) {
+        sum = 0;  // reset before starting
+        solve(root);
+        return sum;
+    }
+}
+//Kth largest element 
+import java.util.PriorityQueue;
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        
+        for (int num : nums) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();  // remove smallest in heap
+            }
+        }
+        
+        return minHeap.peek(); // kth largest element
+    }
+}
