@@ -1,0 +1,54 @@
+//Minimum depth of Binary Tree 
+class Solution {
+    int minHeight=Integer.MAX_VALUE;
+    void solve(TreeNode root,int depth){
+        if(root==null){
+            return;
+        }
+        if(root.left==null && root.right==null){
+            minHeight=Math.min(minHeight,depth);
+        }
+        solve(root.left,depth+1);
+        solve(root.right,depth+1);
+    }
+    public int minDepth(TreeNode root) {
+        int depth=1;
+        if(root==null){
+            return 0;
+        }
+        solve(root,1);
+        return minHeight;
+
+        
+    }
+}
+//Number of subarrays with sum k
+class Solution {
+    int gcd(int a, int b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
+    }
+
+    int lcm(int a, int b) {
+        return (a / gcd(a, b)) * b;
+    }
+
+    public int subarrayLCM(int[] nums, int k) {
+        int cnt = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int lcm=nums[i];
+            
+            
+            for (int j = i ; j < n; j++) {
+                lcm = lcm(lcm, nums[j]);
+                if (lcm == k) {
+                    cnt++;
+                } else if (lcm > k) {
+                    break;
+                }
+            }
+        }
+        return cnt;
+    }
+}
