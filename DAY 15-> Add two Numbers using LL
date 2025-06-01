@@ -1,0 +1,37 @@
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode t1 = l1;
+        ListNode t2 = l2;
+        ListNode dummy = new ListNode(-1);  // Dummy node to start the result list
+        ListNode curr = dummy;  // Pointer to build the result list
+        int carry = 0;
+
+        while (t1 != null || t2 != null) {
+            int sum = carry;  // Start with the carry from the previous step
+
+            if (t1 != null) {
+                sum += t1.val;
+                t1 = t1.next;
+            }
+            if (t2 != null) {
+                sum += t2.val;
+                t2 = t2.next;
+            }
+
+            // Create the new node with the value of sum % 10
+            ListNode newNode = new ListNode(sum % 10);
+            curr.next = newNode;  // Assign the newly created node to curr.next
+            curr = curr.next;  // Move the pointer forward to the new node
+
+            carry = sum / 10;  // Update the carry for the next iteration
+        }
+
+        // If there's a carry left, create a new node
+        if (carry != 0) {
+            ListNode carryNode = new ListNode(carry);
+            curr.next = carryNode;  // Assign carry node to curr.next
+        }
+
+        return dummy.next;  // Return the result list starting from the first node
+    }
+}
