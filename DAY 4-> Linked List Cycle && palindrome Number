@@ -1,0 +1,43 @@
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+        
+    }
+}
+//Palindrome Number 
+class Solution {
+    public boolean isPalindrome(int x) {
+        StringBuilder res=new StringBuilder();
+       
+       if(x<0){
+        return false;
+       }
+        while(x>0){
+            int digit=x%10;
+            char ch= (char)(digit+'0');
+            res.append(ch);
+            x=x/10;
+        }
+        String s=res.toString();
+        int l=0;
+        int r=s.length()-1;
+        while(l<=r){
+            if(s.charAt(l)!=s.charAt(r)){
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+        
+    }
+}
