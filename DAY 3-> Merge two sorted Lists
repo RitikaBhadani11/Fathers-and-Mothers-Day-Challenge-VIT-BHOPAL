@@ -32,3 +32,25 @@ class Solution {
         
     }
 }
+//Add digits
+class Solution {
+    int solve(int num){
+       if(num>=0 && num<=9){
+        return num;
+       }
+       int sum=0;
+       while(num>0){
+        int digit=num%10;
+        sum=sum+digit;
+        num=num/10;
+       }
+       return solve(sum);
+    }
+    public int addDigits(int num) {
+        return solve(num);
+        
+
+        
+        
+    }
+}
